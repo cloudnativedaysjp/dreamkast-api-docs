@@ -9,19 +9,107 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /cndt2020.json:
+  /{eventId}:
     get:
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/get_event_response'
+                $ref: '#/components/schemas/Event'
+  /{eventId}/tracks:
+    get:
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Track'
+  
+  /{eventId}/tracks/{trackId}:
+    get:
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: string
+        - name: trackId
+          in: path
+          description: ID of track
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+  /{eventId}/talks:
+    get:
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Talk'
+  /{eventId}/talks/{talkId}:
+    get:
+      parameters:
+        - name: eventId
+          in: path
+          description: ID of event
+          required: true
+          schema:
+            type: string
+        - name: talkId
+          in: path
+          description: ID of talk
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Talk'
 
 components:
   schemas:
-    get_event_response:
+    Event:
       type: object
       additionalProperties: false
       properties:
@@ -56,4 +144,73 @@ components:
         - privacy_policy_for_speaker
         - copyright
         - coc
-
+    Track:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        abbr:
+          type: string
+        status:
+          type: string
+        theme:
+          type: string
+        about:
+          type: string
+        privacy_policy:
+          type: string
+        privacy_policy_for_speaker:
+          type: string
+        copyright:
+          type: string
+        coc:
+          type: string
+      required:
+        - id
+        - name
+        - abbr
+        - status
+        - theme
+        - about
+        - privacy_policy
+        - privacy_policy_for_speaker
+        - copyright
+        - coc
+    Talk:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        abbr:
+          type: string
+        status:
+          type: string
+        theme:
+          type: string
+        about:
+          type: string
+        privacy_policy:
+          type: string
+        privacy_policy_for_speaker:
+          type: string
+        copyright:
+          type: string
+        coc:
+          type: string
+      required:
+        - id
+        - name
+        - abbr
+        - status
+        - theme
+        - about
+        - privacy_policy
+        - privacy_policy_for_speaker
+        - copyright
+        - coc
