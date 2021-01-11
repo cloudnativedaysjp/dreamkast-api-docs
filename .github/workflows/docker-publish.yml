@@ -46,9 +46,8 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         run: |
-          #VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-          #[[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          IMAGE_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && IMAGE_TAG=$(echo $IMAGE_TAG | sed -e 's/^v//')
 
-          IMAGE_TAG=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
           docker build -t ${{secrets.IMAGE_NAME}}:$IMAGE_TAG .
           docker push ${{secrets.IMAGE_NAME}}:$IMAGE_TAG
