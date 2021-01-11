@@ -1,8 +1,8 @@
 openapi: "3.0.2"
 info:
-  title: API Title
+  title: Dreamkast API
   version: "1.0"
-  description: "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  description: "This is a API definition of the Dreamakst. You can find a documentation of this API at http://api-docs.dev.cloudnativedays.jp/."
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -172,33 +172,13 @@ components:
           type: number
         name:
           type: string
-        abbr:
+        vimeoId: # TBD
           type: string
-        status:
-          type: string
-        theme:
-          type: string
-        about:
-          type: string
-        privacy_policy:
-          type: string
-        privacy_policy_for_speaker:
-          type: string
-        copyright:
-          type: string
-        coc:
-          type: string
+        talks:
+          type: Talk
       required:
         - id
         - name
-        - abbr
-        - status
-        - theme
-        - about
-        - privacy_policy
-        - privacy_policy_for_speaker
-        - copyright
-        - coc
     Talk:
       type: object
       additionalProperties: false
