@@ -25,6 +25,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Event'
+        '400':
+          description: Invalid eventId supplied
+        '404':
+          description: Event not found
   /{eventId}/tracks:
     get:
       parameters:
@@ -43,6 +47,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Track'
+        '400':
+          description: Invalid eventId supplied
+        '404':
+          description: Event not found
   
   /{eventId}/tracks/{trackId}:
     get:
@@ -66,6 +74,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Track'
+        '400':
+          description: Invalid params supplied
+        '404':
+          description: Track not found
   /{eventId}/talks:
     get:
       parameters:
@@ -84,6 +96,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Talk'
+        '400':
+          description: Invalid eventId supplied
+        '404':
+          description: Event not found
   /{eventId}/talks/{talkId}:
     get:
       parameters:
@@ -106,6 +122,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Talk'
+        '400':
+          description: Invalid params supplied
+        '404':
+          description: Talk not found
 
 components:
   schemas:
@@ -185,32 +205,48 @@ components:
       properties:
         id:
           type: number
-        name:
+        trackId:
           type: string
-        abbr:
+        vimeoId: # TBD
           type: string
-        status:
+        title:
           type: string
-        theme:
+        abstract:
           type: string
-        about:
+        speakers:
+          type: array
+        dayId:  # TBD
+          type: number
+        showOnTimetable:
+          type: boolean
+        startTime: # TBD(Timezone)
           type: string
-        privacy_policy:
+        endTime: # TBD(Timezone)
           type: string
-        privacy_policy_for_speaker:
-          type: string
-        copyright:
-          type: string
-        coc:
+        talkTimeId: # TBD
+          type: number
+        talkDifficultyId:
+          type: number
+        talkCategoryId:
+          type: number
+        videoPublished: # TBD
+          type: boolean
+        onAir:
+          type: boolean
+        documentUrl:
           type: string
       required:
         - id
-        - name
-        - abbr
-        - status
-        - theme
-        - about
-        - privacy_policy
-        - privacy_policy_for_speaker
-        - copyright
-        - coc
+        - trackId
+        - vimeoId
+        - title
+        - abstract
+        - speakers
+        - dayId
+        - showOnTimetable
+        - startTime
+        - endTime
+        - talkTimeId
+        - talkDifficultyId
+        - talkCategoryId
+        - videoPublished
