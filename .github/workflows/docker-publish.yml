@@ -49,5 +49,5 @@ jobs:
           IMAGE_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && IMAGE_TAG=$(echo $IMAGE_TAG | sed -e 's/^v//')
 
-          docker build -t ${{secrets.IMAGE_NAME}}:$IMAGE_TAG .
-          docker push ${{secrets.IMAGE_NAME}}:$IMAGE_TAG
+          docker build -t public.ecr.aws/f5j9d0q5/dreamkast-api-mock:$IMAGE_TAG .
+          docker push public.ecr.aws/f5j9d0q5/dreamkast-api-mock:$IMAGE_TAG
