@@ -175,7 +175,7 @@ components:
         vimeoId: # TBD
           type: string
         talks:
-          type: Talk
+          type: array
       required:
         - id
         - name
