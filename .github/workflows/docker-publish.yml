@@ -35,12 +35,19 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: dreamkast-api-mock
         run: |
-          echo ${{ github.ref }}
+          echo REF ${{ github.ref }}
+          echo HEAD REF ${{ github.head_ref }}
+          echo SHA ${{ github.sha }}
           IMAGE_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && IMAGE_TAG=$(echo $IMAGE_TAG | sed -e 's/^v//')
-          echo "::set-output name=IMAGE_TAG::${IMAGE_TAG}"
 
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
+
+          echo "::set-output name=IMAGE_TAG::${IMAGE_TAG}"
 
       - name: Render Amazon ECS task definition
         id: render-container
