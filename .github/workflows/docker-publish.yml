@@ -4,12 +4,12 @@ on:
   push:
     branches:
     - master
-  pull_request:
-    branches:
-      - master
-    types: [opened, synchronize]
-    tags:
-      - v*
+  # pull_request:
+  #   branches:
+  #     - master
+  #   types: [opened, synchronize]
+  #   tags:
+  #     - v*
 
 jobs:
   push:
