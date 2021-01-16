@@ -12,21 +12,6 @@ on:
       - v*
 
 jobs:
-#  test:
-#    runs-on: ubuntu-latest
-
-#    steps:
-#      - uses: actions/checkout@v2
-
-#      - name: Run tests
-#        run: |
-#          if [ -f docker-compose.test.yml ]; then
-#            docker-compose --file docker-compose.test.yml build
-#            docker-compose --file docker-compose.test.yml run sut
-#          else
-#            docker build . --file Dockerfile
-#          fi
-
   push:
     runs-on: ubuntu-latest
 
@@ -50,6 +35,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: dreamkast-api-mock
         run: |
+          echo ${{ github.ref }}
           IMAGE_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && IMAGE_TAG=$(echo $IMAGE_TAG | sed -e 's/^v//')
           echo "::set-output name=IMAGE_TAG::${IMAGE_TAG}"
