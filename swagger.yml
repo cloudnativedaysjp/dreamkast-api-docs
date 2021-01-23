@@ -1,7 +1,7 @@
 openapi: "3.0.2"
 info:
   title: Dreamkast API
-  version: "1.0"
+  version: "1.0.0"
   description: "This is a API definition of the Dreamakst. You can find a documentation of this API at http://api-docs.dev.cloudnativedays.jp/."
   license:
     name: "Apache 2.0"
@@ -155,6 +155,17 @@ components:
           type: string
         coc:
           type: string
+      example:
+        id: 2
+        name: "CloudNative Days Spring 2020 ONLINE"
+        abbr: "cndo2021"
+        status: "closed"
+        theme: "ともに踏み出すCloudNative祭"
+        about: "『クラウドネイティブ』って何だっけ？ 私たち自身ずっと考えてきました。"
+        privacy_policy: "プライバシーポリシーだよ"
+        privacy_policy_for_speaker: "スピーカー向けのポリシーだよ"
+        copyright: "CloudNative Days Committee"
+        coc: "CoCだよ"
       required:
         - id
         - name
@@ -178,6 +189,11 @@ components:
           type: string
         videoId:
           type: string
+      example:
+        id: 2
+        name: "Track 2"
+        videoPlatform: "vimeo"
+        videoId: "453935827"
       required:
         - id
         - name
@@ -199,24 +215,41 @@ components:
           type: string
         speakers:
           type: array
-        dayId:  # TBD
+        dayId:
           type: number
         showOnTimetable:
           type: boolean
-        startTime: # TBD(Timezone)
+        startTime:
           type: string
-        endTime: # TBD(Timezone)
+        endTime:
           type: string
-        talkTimeId: # TBD
+        talkDuration:
           type: number
-        talkDifficultyId:
-          type: number
-        talkCategoryId:
-          type: number
+        talkDifficulty:
+          type: string
+        talkCategory:
+          type: string
         onAir:
           type: boolean
         documentUrl:
           type: string
+      example:
+        id: 1
+        trackId: 2
+        videoPlatform: "vimeo"
+        videoId: "453935827"
+        title: "やんごとなき発表"
+        abstract: "やんごとなき発表をします"
+        speakers: "やんごとない人"
+        dayId: 1
+        showOnTimetable: true
+        startTime: "Sat, 23 Jan 2021 09:00:00 GMT"
+        endTime: "Sat, 23 Jan 2021 09:20:00 GMT"
+        talkDuration: 40
+        talkDifficulty: "moderate"
+        talkCategory: "CI/CD"
+        onAir: true
+        documentUrl: "http://documents"
       required:
         - id
         - trackId
@@ -228,6 +261,6 @@ components:
         - showOnTimetable
         - startTime
         - endTime
-        - talkTimeId
-        - talkDifficultyId
-        - talkCategoryId
+        - talkDuration
+        - talkDifficulty
+        - talkCategory
