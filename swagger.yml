@@ -9,6 +9,7 @@ info:
 servers:
   - url: http://localhost:8080
   - url: http://api-mock.dev.cloudnativedays.jp/
+  - url: http://dreamkast-api-mock-178183979.ap-northeast-1.elb.amazonaws.com/
 paths:
   /{eventId}:
     get:
@@ -173,10 +174,10 @@ components:
           type: number
         name:
           type: string
-        vimeoId: # TBD
+        videoPlatform:
           type: string
-        talks:
-          type: array
+        videoId:
+          type: string
       required:
         - id
         - name
@@ -188,7 +189,9 @@ components:
           type: number
         trackId:
           type: string
-        vimeoId: # TBD
+        videoPlatform:
+          type: string
+        videoId:
           type: string
         title:
           type: string
@@ -210,8 +213,6 @@ components:
           type: number
         talkCategoryId:
           type: number
-        videoPublished: # TBD
-          type: boolean
         onAir:
           type: boolean
         documentUrl:
@@ -219,7 +220,7 @@ components:
       required:
         - id
         - trackId
-        - vimeoId
+        - videoId
         - title
         - abstract
         - speakers
@@ -230,4 +231,3 @@ components:
         - talkTimeId
         - talkDifficultyId
         - talkCategoryId
-        - videoPublished
