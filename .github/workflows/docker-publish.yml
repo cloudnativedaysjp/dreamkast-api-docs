@@ -86,5 +86,5 @@ jobs:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           repository: cloudnativedaysjp/dreamkast-infra
           directory: dreamkast-infra
-          branch: master
+          branch: main
 
