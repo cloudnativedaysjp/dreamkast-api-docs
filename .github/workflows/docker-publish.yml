@@ -67,7 +67,7 @@ jobs:
 
       - name: Update Kubernetes resources
         run: |
-          cd dreamkast-infra/swagger/base
+          cd dreamkast-infra/dreamkast-api-mock/base
           kustomize edit set image dreamkast-api-mock=${{ steps.ecr.outputs.IMAGE_WITH_SHA }}
           cat kustomization.yaml
 
