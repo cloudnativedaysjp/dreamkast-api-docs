@@ -66,15 +66,13 @@ jobs:
 
       - name: Update Kubernetes resources
         run: |
-          pwd
-          cd $HOME
-          pwd 
           cd dreamkast-infra/swagger/base
           kustomize edit set image dreamkast-api-mock=${{ steps.ecr.outputs.IMAGE_TAG }}
           cat kustomization.yaml
 
       - name: Commit files
         run: |
+          cd dreamkast-infra/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -am "Bump docker tag"
@@ -83,3 +81,6 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: cloudnativedaysjp/dreamkast-infra
+          directory: dreamkast-infra
+
