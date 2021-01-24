@@ -58,6 +58,7 @@ jobs:
         with:
           repository: cloudnativedaysjp/dreamkast-infra
           path: dreamkast-infra
+          token:  ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
