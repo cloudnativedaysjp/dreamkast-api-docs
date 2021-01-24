@@ -9,7 +9,7 @@ info:
 servers:
   - url: http://localhost:8080
   - url: http://api-mock.dev.cloudnativedays.jp/
-  - url: http://dreamkast-api-mock-178183979.ap-northeast-1.elb.amazonaws.com/
+  - url: http://dreamkast-api-mock.udcp.info/
 paths:
   /{eventId}:
     get:
