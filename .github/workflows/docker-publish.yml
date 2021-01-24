@@ -41,25 +41,42 @@ jobs:
           IMAGE_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && IMAGE_TAG=$(echo $IMAGE_TAG | sed -e 's/^v//')
 
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          IMAGE_WITH_TAG=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          IMAGE_WITH_SHA=$ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
 
-          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
+          docker build -t $IMAGE_WITH_TAG .
+          docker push $IMAGE_WITH_TAG
 
-          echo "::set-output name=IMAGE_TAG::${IMAGE_TAG}"
+          docker tag $IMAGE_WITH_TAG $IMAGE_WITH_SHA
+          docker push $IMAGE_WITH_SHA
 
-      - name: Render Amazon ECS task definition
-        id: render-container
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
+          echo "::set-output name=IMAGE_WITH_TAG::${IMAGE_WITH_TAG}"
+          echo "::set-output name=IMAGE_WITH_SHA::${IMAGE_WITH_SHA}"
+
+      - name: Checkout dreamkast-infra
+        uses: actions/checkout@v2
         with:
-          task-definition: task-definition.json
-          container-name: dreamkast-api-mock
-          image: ${{ steps.login-ecr.outputs.registry }}/dreamkast-api-mock:${{steps.ecr.outputs.IMAGE_TAG}}
+          repository: cloudnativedaysjp/dreamkast-infra
+          path: dreamkast-infra
 
-      - name: Deploy to Amazon ECS service
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v1
         with:
-          task-definition: ${{ steps.render-container.outputs.task-definition }}
-          service: dreamkast-api-service
-          cluster: dreamkast
+          kustomize-version: "3.6.1"
+
+      - name: Update Kubernetes resources
+        run: |
+          cd dreamkast-infra/swagger/base
+          kustomize edit set image dreamkast-api-mock=${{ steps.ecr.outputs.IMAGE_TAG }}
+          cat kustomization.yaml
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Bump docker tag"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
