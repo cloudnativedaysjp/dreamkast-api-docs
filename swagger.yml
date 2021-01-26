@@ -7,9 +7,9 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 servers:
-  - url: http://localhost:8080
-  - url: http://api-mock.dev.cloudnativedays.jp/
-  - url: http://dreamkast-api-mock.udcp.info/
+  - url: http://localhost:8080/api/v1
+  - url: http://api-mock.dev.cloudnativedays.jp/api/v1
+  - url: http://dreamkast-api-mock.udcp.info/api/v1
 paths:
   /{eventId}:
     get:
