@@ -7,12 +7,14 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 servers:
-  - url: http://localhost:8080/api/v1
-  - url: http://api-mock.dev.cloudnativedays.jp/api/v1
-  - url: http://dreamkast-api-mock.udcp.info/api/v1
+  - url: http://localhost:8080/
+  - url: http://api-mock.dev.cloudnativedays.jp/
+  - url: http://dreamkast-api-mock.udcp.info/
 paths:
-  /{eventId}:
+  /api/v1/events/{eventId}:
     get:
+      tags:
+        - Event
       parameters:
         - name: eventId
           in: path
@@ -31,8 +33,10 @@ paths:
           description: Invalid eventId supplied
         '404':
           description: Event not found
-  /{eventId}/tracks:
+  /api/v1/events/{eventId}/tracks:
     get:
+      tags:
+        - Track
       parameters:
         - name: eventId
           in: path
@@ -54,8 +58,10 @@ paths:
         '404':
           description: Event not found
   
-  /{eventId}/tracks/{trackId}:
+  /api/v1/events/{eventId}/tracks/{trackId}:
     get:
+      tags:
+        - Track
       parameters:
         - name: eventId
           in: path
@@ -80,8 +86,10 @@ paths:
           description: Invalid params supplied
         '404':
           description: Track not found
-  /{eventId}/talks:
+  /api/v1/events/{eventId}/talks:
     get:
+      tags:
+        - Talk
       parameters:
         - name: eventId
           in: path
@@ -102,8 +110,10 @@ paths:
           description: Invalid eventId supplied
         '404':
           description: Event not found
-  /{eventId}/talks/{talkId}:
+  /api/v1/events/{eventId}/talks/{talkId}:
     get:
+      tags:
+        - Talk
       parameters:
         - name: eventId
           in: path
