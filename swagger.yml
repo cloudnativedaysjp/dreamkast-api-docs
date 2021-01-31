@@ -137,9 +137,15 @@ paths:
           required: true
           schema:
             type: string
-        - name: talkId
+        - name: roomId
           in: query
-          description: ID of talk
+          description: ID of chat room
+          required: true
+          schema:
+            type: string
+        - name: roomType
+          in: query
+          description: Type of chat room
           required: true
           schema:
             type: string
