@@ -204,6 +204,29 @@ paths:
       responses:
         '201':
           description: CREATED
+  /api/v1/sponsors:
+    get:
+      tags:
+        - Sponsor
+      parameters:
+        - name: eventId
+          in: query
+          description: ID of event
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sponsor'
+        '400':
+          description: Invalid params supplied
+
 components:
   schemas:
     Event:
@@ -361,3 +384,39 @@ components:
         - eventId
         - talkId
         - body
+    Sponsor:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: number
+        conference_id:
+          type: number
+        name:
+          type: string
+        abbr:
+          type: string
+        url:
+          type: string
+        logo_url:
+          type: string
+      example:
+        - id: 1
+          conference_id: 2
+          name: スポンサー1株式会社
+          abbr: sponsor1
+          url: https://example.com/
+          logo_url: cndo2021/trademark.png
+        - id: 2
+          conference_id: 2
+          name: スポンサー2株式会社
+          abbr: sponsor2
+          url: https://example.com/
+          logo_url: dummy.png
+      required:
+        - id
+        - conference_id
+        - name
+        - abbr
+        - url
+        - logo_url
