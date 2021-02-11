@@ -368,8 +368,6 @@ components:
       properties:
         id:
           type: number
-        eventId:
-          type: number
         eventAbbr:
           type: string
         talkId:
@@ -383,7 +381,6 @@ components:
         body: "foo bar"
         createdAt: "2021-01-30T10:06:33.938Z"
       required:
-        - eventId
         - eventAbbr
         - talkId
         - body
@@ -392,8 +389,6 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: number
-        eventId:
           type: number
         eventAbbr:
           type: string
@@ -420,8 +415,7 @@ components:
           logo_url: dummy.png
       required:
         - id
-        - event_id
-        - event_abbr
+        - eventAbbr
         - name
         - abbr
         - url
