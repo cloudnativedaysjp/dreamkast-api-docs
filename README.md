@@ -8,6 +8,12 @@ docker run -u 1000:1000 --rm -v `pwd`:/work swaggerapi/swagger-codegen-cli-v3 ge
 npm start
 ```
 
+or
+
+```
+make api_mock_run
+```
+
 To view the Swagger UI interface:
 
 ```
