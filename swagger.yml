@@ -168,7 +168,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChatMessage'
+                items:
+                  $ref: '#/components/schemas/ChatMessage'
         '400':
           description: Invalid params supplied
         '404':
