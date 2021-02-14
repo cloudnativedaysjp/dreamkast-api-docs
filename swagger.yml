@@ -317,22 +317,38 @@ components:
         documentUrl:
           type: string
       example:
-        id: 1
-        trackId: 2
-        videoPlatform: "vimeo"
-        videoId: "453935827"
-        title: "やんごとなき発表"
-        abstract: "やんごとなき発表をします"
-        speakers: "やんごとない人"
-        dayId: 1
-        showOnTimetable: true
-        startTime: "Sat, 23 Jan 2021 09:00:00 GMT"
-        endTime: "Sat, 23 Jan 2021 09:20:00 GMT"
-        talkDuration: 40
-        talkDifficulty: "moderate"
-        talkCategory: "CI/CD"
-        onAir: true
-        documentUrl: "http://documents"
+        - id: 1
+          trackId: 2
+          videoPlatform: "vimeo"
+          videoId: "453935827"
+          title: "やんごとなき発表"
+          abstract: "やんごとなき発表をします"
+          speakers: "やんごとない人"
+          dayId: 1
+          showOnTimetable: true
+          startTime: "Sat, 23 Jan 2021 09:00:00 GMT"
+          endTime: "Sat, 23 Jan 2021 09:20:00 GMT"
+          talkDuration: 40
+          talkDifficulty: "moderate"
+          talkCategory: "CI/CD"
+          onAir: true
+          documentUrl: "http://documents"
+        - id: 2
+          trackId: 2
+          videoPlatform: "vimeo"
+          videoId: "453935827"
+          title: "やんごとなき発表"
+          abstract: "やんごとなき発表をします"
+          speakers: "やんごとない人"
+          dayId: 1
+          showOnTimetable: true
+          startTime: "Sat, 23 Jan 2021 09:00:00 GMT"
+          endTime: "Sat, 23 Jan 2021 09:20:00 GMT"
+          talkDuration: 40
+          talkDifficulty: "moderate"
+          talkCategory: "CI/CD"
+          onAir: true
+          documentUrl: "http://documents"
       required:
         - id
         - trackId
