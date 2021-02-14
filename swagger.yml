@@ -296,6 +296,8 @@ components:
           type: string
         speakers:
           type: array
+          items:
+            type: number
         dayId:
           type: number
         showOnTimetable:
